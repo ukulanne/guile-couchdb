@@ -2,7 +2,7 @@
 ;; Anne Summers                  ;;
 ;; <ukulanne@gmail.com>          ;;
 ;; March 25, 2019                ;;
-;; Guile web app server example  ;;
+;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -43,7 +43,6 @@
 
 (define (couchdb-create db)
   (let ((uri (build-uri 'http #:host COUCHDB-SERVER #:port COUCHDB-PORT #:path (string-append "/" db))))
-    (display (string-append COUCHDB-SERVER "5984" "/" db))
     (call-with-values
         (lambda ()  (http-put uri #:keep-alive? #f))
       (lambda (request body) (utf8->string body)))))
