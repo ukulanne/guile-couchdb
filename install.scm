@@ -1,12 +1,15 @@
-#!/usr/local/bin/guile -s 
+#!/usr/local/bin/guile \
+--no-auto-compile -s 
 !#
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Anne Summers                  ;;
-;; <ukulanne@gmail.com>          ;;
-;; March 26, 2019                ;;
-;; Couchdb guile wrapper test    ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Anne Summers                    ;;
+;; <ukulanne@gmail.com>            ;;
+;; March 26, 2019                  ;;
+;; Couchdb guile module installer  ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Time-stamp: <2019-03-26 22:10:47 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -23,26 +26,13 @@
 ;;    along with this program.  If not, see <https://www.gnu.org/licenses/>.       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-03-08 14:55:40 panda> 
+(define *COUCHDB-FILE* "couchdb.scm")
 
-(use-modules (json))
-;;             (couchdb couchdb))
-
-(load "./couchdb.scm")
-(display "[INFO] couchdb test using localhost\n")
-(display (string-append "[INFO] Guile version: " (version)))
-(newline)
-(newline)
-(display "[COUCHDB] Couchdb server version")
-(display (couchdb-version))
-(newline)
-(display "[COUCHDB] Create DB panda")
-(newline)
-(display (couchdb-create "panda"))
-(newline)
-(display "[COUCHDB] Get panda with id 'tohui'")
-(display (couchdb-get "panda" "tohui"))
-(newline)
-(display "[COUCHDB] Get all from db panda")
-(newline)
-(display (couchdb-list "panda"))
+(display "[HELLO] Installer script for couchdb.scm\n")
+(display (string-append "[INFO] Guile version: " (version) "\n"))
+(display (apply string-append `("[INFO] Guile library dir: " ,(%library-dir) "\n")))
+(display "[INFO] Installing couchd.scm module...")
+(copy-file *COUCHDB-FILE* (string-append (%library-dir) *COUCHDB-FILE*))
+(display "[INFO] Installation was succesful\n")
+(display "[INFO] You can now use couchdb.scm with (use-modules (couchdb couchdb))\n")
+(display "[BYE] Happy scheming!\n")
