@@ -1,9 +1,10 @@
 # guile-couchdb
 Couchdb for Guile Scheme
 
-`(couchdb-use db)`
 
 `(couchdb-create db)`
+
+`(coucdhb-db-delete db)`
 
 `(couchdb-get cdb id)`
 
@@ -12,3 +13,5 @@ Couchdb for Guile Scheme
 `(couchdb-list cdb)`
 
 `(couchdb-delete cdb id)`
+
+`(couchdb-version)`
