@@ -25,11 +25,24 @@
 
 ;; Time-stamp: <2019-03-08 14:55:40 panda> 
 
-;;(use-modules (json))
-(load "./couchdb.scm")
+;;(use-modules (json)
+;;             (couchdb couchdb))
 
+(load "./couchdb.scm")
+(display "[INFO] couchdb test using localhost\n")
+(display (string-append "[INFO] Guile version: " (version)))
+(newline)
+(newline)
+(display "[COUCHDB] Couchdb server version")
+(display (couchdb-version))
+(newline)
+(display "[COUCHDB] Create DB panda")
+(newline)
 (display (couchdb-create "panda"))
 (newline)
+(display "[COUCHDB] Get panda with id 'tohui'")
 (display (couchdb-get "panda" "tohui"))
+(newline)
+(display "[COUCHDB] Get all from db panda")
 (newline)
 (display (couchdb-list "panda"))

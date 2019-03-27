@@ -22,6 +22,9 @@
 
 ;; Time-stamp: <2019-03-08 14:55:40 panda> 
 
+;;(define-module (couchdb couchdb)
+;;  #:export (couchdb-use couchdb-create couchdb-get couchdb-list))
+
 (use-modules (rnrs bytevectors) 
              (web uri)
 	     (web client))
@@ -38,6 +41,9 @@
 ;; (couchdb-insert cdb id . rev)
 ;; (couchdb-list cdb)
 ;; (couchdb-delete cdb id)
+
+(define (couchdb-make-uri path)
+  (build-uri 'http #:host COUCHDB-SERVER #:port COUCHDB-PORT #:path path))
 
 (define (couchdb-use db) (set! COUCHDB-DB db))
 
@@ -60,3 +66,9 @@
     (call-with-values
         (lambda ()  (http-get uri #:decode-body? #t #:keep-alive? #f))
       (lambda (request body) (utf8->string body)))))
+
+(define (couchdb-version)
+  (let ((uri (build-uri 'http #:host COUCHDB-SERVER #:port COUCHDB-PORT)))
+  (call-with-values
+        (lambda ()  (http-get uri #:keep-alive? #f))
+    (lambda (request body) (utf8->string body)))))
