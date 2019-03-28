@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-03-27 19:37:41 panda> 
+;; Time-stamp: <2019-03-27 20:00:35 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -26,7 +26,8 @@
   #:use-module (rnrs bytevectors) 
   #:use-module (web uri)
   #:use-module (web client)
-  #:export (couchdb-create couchdb-get couchdb-list couchdb-server! couchdb-version))
+  #:export (couchdb-create couchdb-get couchdb-list couchdb-list-all
+            couchdb-server! couchdb-version))
 
 ;; (couchdb-create db)
 ;; (couchdb-delete cdb id)
@@ -35,10 +36,6 @@
 ;; (couchdb-list cdb)
 ;; (couchdb-server! url port)
 ;; (couchdb-version)
-
-;(use-modules (rnrs bytevectors) 
- ;            (web uri)
-;	     (web client))
 
 (define COUCHDB-SERVER "localhost")
 (define COUCHDB-PORT 5984)
@@ -60,6 +57,12 @@
 
 (define (couchdb-list cdb)
   (let ((uri (couchdb-make-uri (string-append "/" cdb "?include_docs=true"))))
+    (call-with-values
+        (lambda () (http-get uri #:keep-alive? #f))
+      (lambda (request body) (utf8->string body)))))
+
+(define (couchdb-list-all)
+  (let ((uri (couchdb-make-uri (string-append "/_all_dbs"))))
     (call-with-values
         (lambda () (http-get uri #:keep-alive? #f))
       (lambda (request body) (utf8->string body)))))

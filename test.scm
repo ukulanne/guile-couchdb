@@ -9,7 +9,7 @@
 ;; Couchdb guile wrapper test    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-03-27 19:51:31 panda> 
+;; Time-stamp: <2019-03-27 20:00:06 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -29,11 +29,13 @@
 (use-modules (json)
              (couchdb))
 
-;;(load "./couchdb.scm")
 (display "[INFO] couchdb test using localhost\n")
 (display (string-append "[INFO] Guile version: " (version) "\n\n"))
 (display "[COUCHDB] Couchdb server version\n")
 (display (couchdb-version))
+(newline)
+(display "[COUCHDB] List all dbs\n")
+(display (couchdb-list-all))
 (newline)
 (display "[COUCHDB] Create DB panda")
 (newline)
