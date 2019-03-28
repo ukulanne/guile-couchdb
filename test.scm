@@ -1,4 +1,5 @@
-#!/usr/local/bin/guile -s 
+#!/usr/local/bin/guile \
+--no-auto-compile -s
 !#
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -7,6 +8,8 @@
 ;; March 26, 2019                ;;
 ;; Couchdb guile wrapper test    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Time-stamp: <2019-03-27 19:51:31 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -23,24 +26,20 @@
 ;;    along with this program.  If not, see <https://www.gnu.org/licenses/>.       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-03-08 14:55:40 panda> 
-
 (use-modules (json)
              (couchdb))
 
 ;;(load "./couchdb.scm")
 (display "[INFO] couchdb test using localhost\n")
-(display (string-append "[INFO] Guile version: " (version)))
-(newline)
-(newline)
-(display "[COUCHDB] Couchdb server version")
+(display (string-append "[INFO] Guile version: " (version) "\n\n"))
+(display "[COUCHDB] Couchdb server version\n")
 (display (couchdb-version))
 (newline)
 (display "[COUCHDB] Create DB panda")
 (newline)
 (display (couchdb-create "panda"))
 (newline)
-(display "[COUCHDB] Get panda with id 'tohui'")
+(display "[COUCHDB] Get panda with id 'tohui' \n")
 (display (couchdb-get "panda" "tohui"))
 (newline)
 (display "[COUCHDB] Get all from db panda")
