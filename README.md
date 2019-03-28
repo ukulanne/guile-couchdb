@@ -17,6 +17,7 @@ Happy Scheming!
 ```
 [panda@pandaville guile-couchdb]$ sudo ./install.scm 
 [HELLO] Installer script for couchdb.scm
+[INFO] Running under: Linux x86_64
 [INFO] Guile version: 2.9.1
 [INFO] Guile library dir: /usr/local/share/guile/3.0
 [INFO] Installing couchdb.scm module...
