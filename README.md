@@ -1,6 +1,19 @@
 # guile-couchdb
 Couchdb for Guile Scheme
 
+# INSTALL
+```
+[panda@pandaville guile-couchdb]$ sudo ./install.scm 
+[HELLO] Installer script for couchdb.scm
+[INFO] Guile version: 2.9.1
+[INFO] Guile library dir: /usr/local/share/guile/3.0
+[INFO] Installing couchdb.scm module...
+[INFO] Installation was succesful
+[INFO] You can now use couchdb.scm with (use-modules (couchdb couchdb))
+[BYE] Happy scheming!
+```
+
+# API
 
 `(couchdb-create db)`
 
@@ -29,5 +42,4 @@ Couchdb for Guile Scheme
 {"error":"file_exists","reason":"The database could not be created, the file already exists."}
 [COUCHDB] Get panda with id 'tohui'
 {"_id":"tohui","_rev":"1-3e4f3249025980223cfbe7a7b750986e","name":"Tohui Panda","country":"Mexico"}
-
 ```
