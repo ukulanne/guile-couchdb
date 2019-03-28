@@ -9,7 +9,7 @@
 ;; Couchdb guile wrapper test    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-03-27 20:00:06 panda> 
+;; Time-stamp: <2019-03-27 21:32:05 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -29,21 +29,21 @@
 (use-modules (json)
              (couchdb))
 
-(display "[INFO] couchdb test using localhost\n")
-(display (string-append "[INFO] Guile version: " (version) "\n\n"))
-(display "[COUCHDB] Couchdb server version\n")
-(display (couchdb-version))
+(display "[INFO]    couchdb test using localhost\n")
+(display (string-append "[INFO]    Guile version: " (version) "\n"))
+(display "[COUCHDB] Couchdb server running: ")
+(display (cdr (assoc "status" (json-string->scm (couchdb-up?)))))
 (newline)
-(display "[COUCHDB] List all dbs\n")
+(display "[COUCHDB] Couchdb server version: ")
+(display (cdr (assoc "version" (json-string->scm (couchdb-version)))))
+(newline)
+(display "[COUCHDB] List all dbs: ")
 (display (couchdb-list-all))
-(newline)
 (display "[COUCHDB] Create DB panda")
 (newline)
 (display (couchdb-create "panda"))
-(newline)
-(display "[COUCHDB] Get panda with id 'tohui' \n")
+(display "[COUCHDB] Get panda with id 'tohui'\n")
 (display (couchdb-get "panda" "tohui"))
-(newline)
-(display "[COUCHDB] Get all from db panda")
-(newline)
-(display (couchdb-list "panda"))
+;;(display "[COUCHDB] Get all from db panda")
+;;(newline)
+;;(display (couchdb-list "panda"))
