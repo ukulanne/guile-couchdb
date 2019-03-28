@@ -1,5 +1,10 @@
 # guile-couchdb
-Couchdb for Guile Scheme
+
+Hello. This library is work in progress. Why would you like to use it? I don't know. Not sure how many pandas out there
+are interested in guile and couchdb but please free to reach out with any issue or comments. API will be changing rapidly
+so bear with me.
+
+Happy Scheming!
 
 # REQUIREMENTS
 
