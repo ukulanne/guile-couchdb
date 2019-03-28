@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-03-26 21:10:24 panda> 
+;; Time-stamp: <2019-03-27 19:37:41 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -22,13 +22,11 @@
 ;;    along with this program.  If not, see <https://www.gnu.org/licenses/>.       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;(define-module (couchdb couchdb)
-;;  #:use-module (rnrs bytevectors) 
-;;  #:use-module (web uri)
-;;  #:use-module (web client)
-;;  #:export (couchdb-create couchdb-get couchdb-list couchdb-server! couchdb-version)
-;;
-;;)
+(define-module (couchdb)
+  #:use-module (rnrs bytevectors) 
+  #:use-module (web uri)
+  #:use-module (web client)
+  #:export (couchdb-create couchdb-get couchdb-list couchdb-server! couchdb-version))
 
 ;; (couchdb-create db)
 ;; (couchdb-delete cdb id)
@@ -38,9 +36,9 @@
 ;; (couchdb-server! url port)
 ;; (couchdb-version)
 
-(use-modules (rnrs bytevectors) 
-             (web uri)
-	     (web client))
+;(use-modules (rnrs bytevectors) 
+ ;            (web uri)
+;	     (web client))
 
 (define COUCHDB-SERVER "localhost")
 (define COUCHDB-PORT 5984)

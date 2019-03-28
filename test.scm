@@ -25,10 +25,10 @@
 
 ;; Time-stamp: <2019-03-08 14:55:40 panda> 
 
-(use-modules (json))
-;;             (couchdb couchdb))
+(use-modules (json)
+             (couchdb))
 
-(load "./couchdb.scm")
+;;(load "./couchdb.scm")
 (display "[INFO] couchdb test using localhost\n")
 (display (string-append "[INFO] Guile version: " (version)))
 (newline)

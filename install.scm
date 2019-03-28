@@ -9,7 +9,7 @@
 ;; Couchdb guile module installer  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-03-26 22:10:47 panda> 
+;; Time-stamp: <2019-03-27 19:39:02 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -32,7 +32,7 @@
 (display (string-append "[INFO] Guile version: " (version) "\n"))
 (display (apply string-append `("[INFO] Guile library dir: " ,(%library-dir) "\n")))
 (display "[INFO] Installing couchd.scm module...")
-(copy-file *COUCHDB-FILE* (string-append (%library-dir) *COUCHDB-FILE*))
+(copy-file *COUCHDB-FILE* (string-append (%library-dir) "/" *COUCHDB-FILE*))
 (display "[INFO] Installation was succesful\n")
 (display "[INFO] You can now use couchdb.scm with (use-modules (couchdb couchdb))\n")
 (display "[BYE] Happy scheming!\n")
