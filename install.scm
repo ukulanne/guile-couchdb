@@ -30,7 +30,7 @@
 (define gj-msg "[INFO] Module guile-json found\n")
 (define u (uname))
 
-(display "[HELLO] Installer script for couchdb.scm\n")
+(display "[HELLO] Installer script for guile-couchdb\n")
 (display (apply string-append `("[INFO] Running under: " ,(utsname:sysname u) " " ,(utsname:machine u) "\n")))
 (display (string-append "[INFO] Guile version: " (version) "\n"))
 (display (apply string-append `("[INFO] Guile library dir: " ,(%library-dir) "\n")))
