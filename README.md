@@ -1,6 +1,12 @@
 # guile-couchdb
 Couchdb for Guile Scheme
 
+# REQUIREMENTS
+
+- [GNU Guile](https://www.gnu.org/software/guile/) 2.x
+- A [couchdb](http://couchdb.apache.org/) server to connect to. Tested with 2.3.x but should work with older versions
+- test.scm uses [guile-json 3.0](https://github.com/aconchillo/guile-json) 
+
 # INSTALL
 ```
 [panda@pandaville guile-couchdb]$ sudo ./install.scm 
