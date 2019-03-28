@@ -55,3 +55,13 @@ Happy Scheming!
 [COUCHDB] Get panda with id 'tohui'
 {"_id":"tohui","_rev":"1-3e4f3249025980223cfbe7a7b750986e","name":"Tohui Panda","country":"Mexico"}
 ```
+# LICENSE
+
+Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
+
+guile-couchdb is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
+
+guile-couchdb is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License along with guile-couchdb. If not, see https://www.gnu.org/licenses/.
+
