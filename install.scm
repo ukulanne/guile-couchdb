@@ -27,8 +27,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define *COUCHDB-FILE* "couchdb.scm")
-
+(define u (uname))
 (display "[HELLO] Installer script for couchdb.scm\n")
+(display (apply string-append `("[INFO] Running under: " ,(utsname:sysname u) " " ,(utsname:machine u) "\n")))
 (display (string-append "[INFO] Guile version: " (version) "\n"))
 (display (apply string-append `("[INFO] Guile library dir: " ,(%library-dir) "\n")))
 (display "[INFO] Installing couchdb.scm module...\n")
