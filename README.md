@@ -9,7 +9,7 @@ Couchdb for Guile Scheme
 [INFO] Guile library dir: /usr/local/share/guile/3.0
 [INFO] Installing couchdb.scm module...
 [INFO] Installation was succesful
-[INFO] You can now use couchdb.scm with (use-modules (couchdb couchdb))
+[INFO] You can now use couchdb.scm with (use-modules (couchdb))
 [BYE] Happy scheming!
 ```
 
