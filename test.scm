@@ -9,7 +9,7 @@
 ;; Couchdb guile wrapper test    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-03-27 21:32:05 panda> 
+;; Time-stamp: <2019-03-27 21:43:46 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -29,7 +29,9 @@
 (use-modules (json)
              (couchdb))
 
-(display "[INFO]    couchdb test using localhost\n")
+(display "[INFO]    couchdb test using: ")
+(display (couchdb-server-info))
+(newline)
 (display (string-append "[INFO]    Guile version: " (version) "\n"))
 (display "[COUCHDB] Couchdb server running: ")
 (display (cdr (assoc "status" (json-string->scm (couchdb-up?)))))

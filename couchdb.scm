@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-03-27 21:17:35 panda> 
+;; Time-stamp: <2019-03-27 21:43:01 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -27,10 +27,11 @@
   #:use-module (web uri)
   #:use-module (web client)
   #:export (couchdb-create couchdb-get couchdb-list couchdb-list-all
-            couchdb-server! couchdb-up? couchdb-version))
+            couchdb-server-info couchdb-server! couchdb-up? couchdb-version))
 
 ;; SERVER
 ;; (couchdb-server! url port)
+;; (couchdb-server-info)
 ;; (couchdb-up?)
 ;; (couchdb-version)
 
@@ -54,6 +55,8 @@
 
 (define (couchdb-make-uri path)
   (build-uri 'http #:host COUCHDB-SERVER #:port COUCHDB-PORT #:path path))
+
+(define (couchdb-server-info) (string-append "http://" COUCHDB-SERVER ":" (number->string COUCHDB-PORT)))
 
 (define (couchdb-server! url port)
   (set! COUCHDB-SERVER url)
