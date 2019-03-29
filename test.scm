@@ -9,7 +9,7 @@
 ;; Couchdb guile wrapper test    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-03-28 19:16:04 panda> 
+;; Time-stamp: <2019-03-28 19:28:44 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -30,7 +30,11 @@
              (couchdb))
 
 (define tohui-json "{\"_id\": \"tohui\",\"name\": \"Tohui Panda\",\"country\": \"Mexico\"}")
-(define po-json "{\"_id\": \"po\",\"name\": \"Po Kung Fu Panda\",\"country\": \"China\"}")
+(define po-json "{\"_id\": \"po\",\"name\": \"Po Kung Fu Panda\",\"country\": \"USA\"}")
+(define xiao-json '(("_id" . "xiao")
+                    ("name" . "Xiao Liwu")
+                    ("country" . "China")))
+;;(display (scm->json-string xiao-json))
 
 (display "[INFO]    couchdb test using: ")
 (display (couchdb-server-info))
@@ -51,6 +55,9 @@
 (display (couchdb-get "panda" "tohui"))
 (display "[COUCHDB] Insert panda with id 'po'\n")
 (display (couchdb-insert "panda" "po" po-json))
-;;(display "[COUCHDB] Get all from db panda")
+(display "[COUCHDB] Insert panda with id 'xiao'\n")
+(display (couchdb-insert "panda" "xiao" (scm->json-string xiao-json)))
+
+;;(display "[COUCHDB] Get all from db panda\n")
 ;;(newline)
 ;;(display (couchdb-list "panda"))
