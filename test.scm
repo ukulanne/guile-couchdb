@@ -9,7 +9,7 @@
 ;; Couchdb guile wrapper test    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-03-28 19:45:33 panda> 
+;; Time-stamp: <2019-03-28 20:25:59 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -53,13 +53,15 @@
 (display "[COUCHDB] Create DB panda")
 (newline)
 (display (couchdb-create "panda"))
-(display "[COUCHDB] Get panda with id 'tohui'\n")
-(display (couchdb-get "panda" "tohui"))
 (display "[COUCHDB] Insert panda with id 'po'\n")
 (display (couchdb-insert "panda" "po" po-json))
 (display "[COUCHDB] Insert panda with id 'xiao'\n")
 (display (couchdb-insert "panda" "xiao" (scm->json-string xiao-json)))
-
+(display "[COUCHDB] Get panda revision for id 'xiao'\n")
+(define xiao-rev  (cdr (assoc "_rev" (json-string->scm (couchdb-get "panda" "xiao")))))
+(display xiao-rev)(newline)
+(display (string-append "[COUCHDB] Delete panda with id: 'xiao' and rev: "))
+(display (couchdb-doc-delete "panda" "xiao" xiao-rev))
 ;;(display "[COUCHDB] Get all from db panda\n")
 ;;(newline)
 ;;(display (couchdb-list "panda"))

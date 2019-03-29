@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-03-28 19:46:20 panda> 
+;; Time-stamp: <2019-03-28 20:24:56 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -26,7 +26,7 @@
   #:use-module (rnrs bytevectors) 
   #:use-module (web uri)
   #:use-module (web client)
-  #:export (couchdb-create couchdb-delete couchdb-get couchdb-insert couchdb-list couchdb-list-all
+  #:export (couchdb-create couchdb-doc-delete couchdb-get couchdb-insert couchdb-list couchdb-list-all
             couchdb-server-info couchdb-server! couchdb-up? couchdb-version))
 
 ;; SERVER
@@ -36,17 +36,17 @@
 ;; (couchdb-version)
 
 ;; DATABASE
-;; (couchdb-create db)
-;; (couchdb-list-all)
+;; (couchdb-db-create db)
+;; (couchdb-db-list-all)
 
 ;; DOC
-;; (couchdb-delete cdb id)
-;; (couchdb-get cdb id)
-;; (couchdb-insert cdb id . rev)
-;; (couchdb-find sexp)
-;; (couchdb-find-by-json json)
-;; (couchdb-index cdb)
-;; (couchdb-list cdb)
+;; (couchdb-doc-delete cdb id)
+;; (couchdb-doc-get cdb id)
+;; (couchdb-doc-insert cdb id . rev)
+;; (couchdb-doc-find sexp)
+;; (couchdb-doc-find-by-json json)
+;; (couchdb-doc-index cdb)
+;; (couchdb-doc-list cdb)
 
 (define COUCHDB-SERVER "localhost")
 (define COUCHDB-PORT 5984)
@@ -56,8 +56,8 @@
 (define (couchdb-make-uri path)
   (build-uri 'http #:host COUCHDB-SERVER #:port COUCHDB-PORT #:path path))
 
-(define (couchdb-make-uri-with-body path body)
-         (build-uri 'http #:host COUCHDB-SERVER #:port COUCHDB-PORT #:path path))
+(define (couchdb-make-uri-with-query path query)
+         (build-uri 'http #:host COUCHDB-SERVER #:port COUCHDB-PORT #:path path #:query query))
 
 (define (couchdb-server-info) (string-append "http://" COUCHDB-SERVER ":" (number->string COUCHDB-PORT)))
 
@@ -69,6 +69,12 @@
   (let ((uri (couchdb-make-uri (string-append "/" db))))
     (call-with-values
         (lambda () (http-put uri #:keep-alive? #f))
+      (lambda (request body) (utf8->string body)))))
+
+(define (couchdb-doc-delete db id rev)
+  (let ((uri (couchdb-make-uri-with-query (string-append "/" db "/" id) (string-append "rev=" rev))))
+    (call-with-values
+        (lambda () (http-delete uri #:keep-alive? #f ))
       (lambda (request body) (utf8->string body)))))
 
 (define (couchdb-insert db id json)
