@@ -55,6 +55,10 @@ Happy Scheming!
 {"error":"file_exists","reason":"The database could not be created, the file already exists."}
 [COUCHDB] Get panda with id 'tohui'
 {"_id":"tohui","_rev":"1-3e4f3249025980223cfbe7a7b750986e","name":"Tohui Panda","country":"Mexico"}
+[COUCHDB] Insert panda with id 'po'
+{"error":"conflict","reason":"Document update conflict."}
+[COUCHDB] Insert panda with id 'xiao'
+{"ok":true,"id":"xiao","rev":"3-49a49bab514e3231fb6b49a223315e15"}
 ```
 # LICENSE
 
