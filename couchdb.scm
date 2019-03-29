@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-03-28 20:24:56 panda> 
+;; Time-stamp: <2019-03-28 20:55:57 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -32,7 +32,7 @@
 ;; SERVER
 ;; (couchdb-server! url port)
 ;; (couchdb-server-info)
-;; (couchdb-up?)
+;; (couchdb-up?) 
 ;; (couchdb-version)
 
 ;; DATABASE
@@ -53,12 +53,15 @@
 (define COUCHDB-USER #f)
 (define COUCHDB-PASSWORD #f)
 
+;;FIXME Just one with define* to handle #:query
 (define (couchdb-make-uri path)
   (build-uri 'http #:host COUCHDB-SERVER #:port COUCHDB-PORT #:path path))
-
+;;(define* (panda #:optional (a 1) (b 2))(display a)(newline)(display b))
 (define (couchdb-make-uri-with-query path query)
          (build-uri 'http #:host COUCHDB-SERVER #:port COUCHDB-PORT #:path path #:query query))
 
+
+;;FIXME needs to account https too
 (define (couchdb-server-info) (string-append "http://" COUCHDB-SERVER ":" (number->string COUCHDB-PORT)))
 
 (define (couchdb-server! url port)
@@ -83,7 +86,6 @@
         (lambda () (http-put uri #:keep-alive? #f #:body json))
       (lambda (request body) (utf8->string body)))))
 
-
 (define (couchdb-list cdb)
   (let ((uri (couchdb-make-uri (string-append "/" cdb "?include_docs=true"))))
     (call-with-values
@@ -102,6 +104,8 @@
         (lambda () (http-get uri #:decode-body? #t #:keep-alive? #f))
       (lambda (request body) (utf8->string body)))))
 
+;; FIXME Maybe just return #t or #f per Scheme tradition?
+;; but that would mean bringing up guile-json (GPL?)
 (define (couchdb-up?)
   (let ((uri (couchdb-make-uri "/_up")))
     (call-with-values
