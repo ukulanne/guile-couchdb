@@ -9,7 +9,7 @@
 ;; Couchdb guile wrapper test    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-03-27 21:43:46 panda> 
+;; Time-stamp: <2019-03-28 18:23:35 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -29,6 +29,9 @@
 (use-modules (json)
              (couchdb))
 
+(define tohui-json "{\"_id\": \"tohui\",\"name\": \"Tohui Panda\",\"country\": \"Mexico\"}")
+(define po-json "{\"_id\": \"po\",\"name\": \"Po Kung Fu Panda\",\"country\": \"China\"}")
+
 (display "[INFO]    couchdb test using: ")
 (display (couchdb-server-info))
 (newline)
@@ -46,6 +49,7 @@
 (display (couchdb-create "panda"))
 (display "[COUCHDB] Get panda with id 'tohui'\n")
 (display (couchdb-get "panda" "tohui"))
+(display (couchdb-insert "panda" "po" po-json))
 ;;(display "[COUCHDB] Get all from db panda")
 ;;(newline)
 ;;(display (couchdb-list "panda"))
