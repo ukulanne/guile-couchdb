@@ -53,12 +53,13 @@ Happy Scheming!
 [COUCHDB] List all dbs: ["panda"]
 [COUCHDB] Create DB panda
 {"error":"file_exists","reason":"The database could not be created, the file already exists."}
-[COUCHDB] Get panda with id 'tohui'
-{"_id":"tohui","_rev":"1-3e4f3249025980223cfbe7a7b750986e","name":"Tohui Panda","country":"Mexico"}
 [COUCHDB] Insert panda with id 'po'
 {"error":"conflict","reason":"Document update conflict."}
 [COUCHDB] Insert panda with id 'xiao'
-{"ok":true,"id":"xiao","rev":"3-49a49bab514e3231fb6b49a223315e15"}
+{"ok":true,"id":"xiao","rev":"19-9c816558312209d78956fcef302487e8"}
+[COUCHDB] Get panda revision for id 'xiao'
+19-9c816558312209d78956fcef302487e8
+[COUCHDB] Delete panda with id: 'xiao' and rev: {"ok":true,"id":"xiao","rev":"20-2ec665f661f1bb03a0187506f88554fe"}
 ```
 # LICENSE
 
