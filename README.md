@@ -56,10 +56,11 @@ Happy Scheming!
 [COUCHDB] Insert panda with id 'po'
 {"error":"conflict","reason":"Document update conflict."}
 [COUCHDB] Insert panda with id 'xiao'
-{"ok":true,"id":"xiao","rev":"19-9c816558312209d78956fcef302487e8"}
+{"ok":true,"id":"xiao","rev":"27-be31fddab5fbbcdf0015dc66eba459db"}
 [COUCHDB] Get panda revision for id 'xiao'
-19-9c816558312209d78956fcef302487e8
-[COUCHDB] Delete panda with id: 'xiao' and rev: {"ok":true,"id":"xiao","rev":"20-2ec665f661f1bb03a0187506f88554fe"}
+27-be31fddab5fbbcdf0015dc66eba459db
+[COUCHDB] Delete panda with id: 'xiao' and rev: 27-be31fddab5fbbcdf0015dc66eba459db
+{"ok":true,"id":"xiao","rev":"28-8680843361a4b2e26b32abd31dfc2f08"}
 ```
 # LICENSE
 
