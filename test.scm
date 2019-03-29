@@ -9,7 +9,7 @@
 ;; Couchdb guile wrapper test    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-03-28 19:28:44 panda> 
+;; Time-stamp: <2019-03-28 19:45:33 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -29,12 +29,14 @@
 (use-modules (json)
              (couchdb))
 
+;; Normal string can be used to insert as documents:
 (define tohui-json "{\"_id\": \"tohui\",\"name\": \"Tohui Panda\",\"country\": \"Mexico\"}")
 (define po-json "{\"_id\": \"po\",\"name\": \"Po Kung Fu Panda\",\"country\": \"USA\"}")
+
+;; Scheme objects can be used and then turned into a json string:
 (define xiao-json '(("_id" . "xiao")
                     ("name" . "Xiao Liwu")
                     ("country" . "China")))
-;;(display (scm->json-string xiao-json))
 
 (display "[INFO]    couchdb test using: ")
 (display (couchdb-server-info))
