@@ -9,7 +9,7 @@
 ;; Couchdb guile wrapper test    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-03-28 18:23:35 panda> 
+;; Time-stamp: <2019-03-28 19:16:04 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -49,6 +49,7 @@
 (display (couchdb-create "panda"))
 (display "[COUCHDB] Get panda with id 'tohui'\n")
 (display (couchdb-get "panda" "tohui"))
+(display "[COUCHDB] Insert panda with id 'po'\n")
 (display (couchdb-insert "panda" "po" po-json))
 ;;(display "[COUCHDB] Get all from db panda")
 ;;(newline)
