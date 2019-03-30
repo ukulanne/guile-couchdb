@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-03-29 19:01:15 panda> 
+;; Time-stamp: <2019-03-29 22:46:28 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -26,25 +26,24 @@
   #:use-module (rnrs bytevectors) 
   #:use-module (web uri)
   #:use-module (web client)
-  #:export (couchdb-db-create couchdb-doc-delete couchdb-doc-get couchdb-doc-insert couchdb-doc-list couchdb-db-list
+  #:export (couchdb-db-create couchdb-db-list couchdb-doc-delete couchdb-doc-get couchdb-doc-insert couchdb-doc-list 
             couchdb-server-info couchdb-server! couchdb-up? couchdb-version))
 
 ;; SERVER
 ;; (couchdb-server! url port)
 ;; (couchdb-server-info)
 ;; (couchdb-up?) 
+;; (couchdb-uuids n)
 ;; (couchdb-version)
-
 ;; DATABASE
 ;; (couchdb-db-create db)
+;; (couchdb-db-index db)
 ;; (couchdb-db-list)
-
+;; (couchdb-db-find selector)
 ;; DOC
 ;; (couchdb-doc-delete cdb id)
 ;; (couchdb-doc-get cdb id)
 ;; (couchdb-doc-insert cdb id . rev)
-;; (couchdb-doc-find sexp)
-;; (couchdb-doc-find-by-json json)
 ;; (couchdb-doc-index cdb)
 ;; (couchdb-doc-list cdb)
 
@@ -53,13 +52,17 @@
 (define COUCHDB-USER #f)
 (define COUCHDB-PASSWORD #f)
 
-;;FIXME Just one with define* to handle #:query
-(define (couchdb-make-uri path)
-  (build-uri 'http #:host COUCHDB-SERVER #:port COUCHDB-PORT #:path path))
-;;(define* (panda #:optional (a 1) (b 2))(display a)(newline)(display b))
-(define (couchdb-make-uri-with-query path query)
-         (build-uri 'http #:host COUCHDB-SERVER #:port COUCHDB-PORT #:path path #:query query))
+(define* (couchdb-make-uri path #:optional (query #f))
+  (build-uri 'http #:host COUCHDB-SERVER #:port COUCHDB-PORT #:path path #:query query))
+(define* (make-uri path #:optional (query #f))
+  (build-uri 'http #:host COUCHDB-SERVER #:port COUCHDB-PORT #:path path #:query query))
 
+(define-macro (define-couchdb-api api verb path)
+  `(define* (,api #:optional (db ""))
+     (let ((uri (make-uri (string-append ,path db))))
+    (call-with-values
+        (lambda () (,verb uri #:decode-body? #t #:keep-alive? #f))
+      (lambda (request body) (utf8->string body))))))
 
 (define (couchdb-server-info) (string-append "http://" COUCHDB-SERVER ":" (number->string COUCHDB-PORT)))
 
@@ -67,34 +70,13 @@
   (set! COUCHDB-SERVER url)
   (set! COUCHDB-PORT port))
 
-(define (couchdb-up?)
-  (let ((uri (couchdb-make-uri "/_up")))
-    (call-with-values
-        (lambda () (http-get uri #:decode-body? #t #:keep-alive? #f))
-      (lambda (request body) (utf8->string body)))))
-
-(define (couchdb-version)
-  (let ((uri (couchdb-make-uri "")))
-    (call-with-values
-        (lambda () (http-get uri #:keep-alive? #f))
-      (lambda (request body) (utf8->string body)))))
-
-
-
-(define (couchdb-db-create db)
-  (let ((uri (couchdb-make-uri (string-append "/" db))))
-    (call-with-values
-        (lambda () (http-put uri #:keep-alive? #f))
-      (lambda (request body) (utf8->string body)))))
-
-(define (couchdb-db-list)
-  (let ((uri (couchdb-make-uri (string-append "/_all_dbs"))))
-    (call-with-values
-        (lambda () (http-get uri #:keep-alive? #f))
-      (lambda (request body) (utf8->string body)))))
+(define-couchdb-api couchdb-up? http-get "/_up")
+(define-couchdb-api couchdb-version http-get "")
+(define-couchdb-api couchdb-db-list http-get "/_all_dbs")
+(define-couchdb-api couchdb-db-create http-put "/")
 
 (define (couchdb-doc-delete db id rev)
-  (let ((uri (couchdb-make-uri-with-query (string-append "/" db "/" id) (string-append "rev=" rev))))
+  (let ((uri (couchdb-make-uri (string-append "/" db "/" id) (string-append "rev=" rev))))
     (call-with-values
         (lambda () (http-delete uri #:keep-alive? #f ))
       (lambda (request body) (utf8->string body)))))
@@ -116,3 +98,5 @@
     (call-with-values
         (lambda () (http-get uri #:keep-alive? #f))
       (lambda (request body) (utf8->string body)))))
+
+
