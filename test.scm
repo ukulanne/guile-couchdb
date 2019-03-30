@@ -9,7 +9,7 @@
 ;; Couchdb guile wrapper test    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-03-28 20:31:43 panda> 
+;; Time-stamp: <2019-03-29 19:01:07 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -49,18 +49,18 @@
 (display (cdr (assoc "version" (json-string->scm (couchdb-version)))))
 (newline)
 (display "[COUCHDB] List all dbs: ")
-(display (couchdb-list-all))
+(display (couchdb-db-list))
 (display "[COUCHDB] Create DB panda")
 (newline)
-(display (couchdb-create "panda"))
+(display (couchdb-db-create "panda"))
 (display "[COUCHDB] Insert panda with id 'po'\n")
-(display (couchdb-insert "panda" "po" po-json))
+(display (couchdb-doc-insert "panda" "po" po-json))
 (display "[COUCHDB] Insert panda with id 'xiao'\n")
-(display (couchdb-insert "panda" "xiao" (scm->json-string xiao-json)))
+(display (couchdb-doc-insert "panda" "xiao" (scm->json-string xiao-json)))
 (display "[COUCHDB] Get panda revision for id 'xiao'\n")
-(define xiao-rev  (cdr (assoc "_rev" (json-string->scm (couchdb-get "panda" "xiao")))))
+(define xiao-rev  (cdr (assoc "_rev" (json-string->scm (couchdb-doc-get "panda" "xiao")))))
 (display xiao-rev)(newline)
-(display (string-append "[COUCHDB] Delete panda with id: 'xiao' and rev: "))
+(display (string-append "[COUCHDB] Delete panda with id: 'xiao' and rev: " xiao-rev "\n"))
 (display (couchdb-doc-delete "panda" "xiao" xiao-rev))
 ;;(display "[COUCHDB] Get all from db panda\n")
 ;;(newline)

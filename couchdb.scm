@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-03-28 20:55:57 panda> 
+;; Time-stamp: <2019-03-29 19:01:15 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -26,7 +26,7 @@
   #:use-module (rnrs bytevectors) 
   #:use-module (web uri)
   #:use-module (web client)
-  #:export (couchdb-create couchdb-doc-delete couchdb-get couchdb-insert couchdb-list couchdb-list-all
+  #:export (couchdb-db-create couchdb-doc-delete couchdb-doc-get couchdb-doc-insert couchdb-doc-list couchdb-db-list
             couchdb-server-info couchdb-server! couchdb-up? couchdb-version))
 
 ;; SERVER
@@ -37,7 +37,7 @@
 
 ;; DATABASE
 ;; (couchdb-db-create db)
-;; (couchdb-db-list-all)
+;; (couchdb-db-list)
 
 ;; DOC
 ;; (couchdb-doc-delete cdb id)
@@ -61,51 +61,12 @@
          (build-uri 'http #:host COUCHDB-SERVER #:port COUCHDB-PORT #:path path #:query query))
 
 
-;;FIXME needs to account https too
 (define (couchdb-server-info) (string-append "http://" COUCHDB-SERVER ":" (number->string COUCHDB-PORT)))
 
 (define (couchdb-server! url port)
   (set! COUCHDB-SERVER url)
   (set! COUCHDB-PORT port))
 
-(define (couchdb-create db)
-  (let ((uri (couchdb-make-uri (string-append "/" db))))
-    (call-with-values
-        (lambda () (http-put uri #:keep-alive? #f))
-      (lambda (request body) (utf8->string body)))))
-
-(define (couchdb-doc-delete db id rev)
-  (let ((uri (couchdb-make-uri-with-query (string-append "/" db "/" id) (string-append "rev=" rev))))
-    (call-with-values
-        (lambda () (http-delete uri #:keep-alive? #f ))
-      (lambda (request body) (utf8->string body)))))
-
-(define (couchdb-insert db id json)
-  (let ((uri (couchdb-make-uri (string-append "/" db "/" id))))
-    (call-with-values
-        (lambda () (http-put uri #:keep-alive? #f #:body json))
-      (lambda (request body) (utf8->string body)))))
-
-(define (couchdb-list cdb)
-  (let ((uri (couchdb-make-uri (string-append "/" cdb "?include_docs=true"))))
-    (call-with-values
-        (lambda () (http-get uri #:keep-alive? #f))
-      (lambda (request body) (utf8->string body)))))
-
-(define (couchdb-list-all)
-  (let ((uri (couchdb-make-uri (string-append "/_all_dbs"))))
-    (call-with-values
-        (lambda () (http-get uri #:keep-alive? #f))
-      (lambda (request body) (utf8->string body)))))
-
-(define (couchdb-get cdb id)
-  (let ((uri (couchdb-make-uri (string-append "/" cdb "/" id "?include_docs=true"))))
-    (call-with-values
-        (lambda () (http-get uri #:decode-body? #t #:keep-alive? #f))
-      (lambda (request body) (utf8->string body)))))
-
-;; FIXME Maybe just return #t or #f per Scheme tradition?
-;; but that would mean bringing up guile-json (GPL?)
 (define (couchdb-up?)
   (let ((uri (couchdb-make-uri "/_up")))
     (call-with-values
@@ -114,6 +75,44 @@
 
 (define (couchdb-version)
   (let ((uri (couchdb-make-uri "")))
+    (call-with-values
+        (lambda () (http-get uri #:keep-alive? #f))
+      (lambda (request body) (utf8->string body)))))
+
+
+
+(define (couchdb-db-create db)
+  (let ((uri (couchdb-make-uri (string-append "/" db))))
+    (call-with-values
+        (lambda () (http-put uri #:keep-alive? #f))
+      (lambda (request body) (utf8->string body)))))
+
+(define (couchdb-db-list)
+  (let ((uri (couchdb-make-uri (string-append "/_all_dbs"))))
+    (call-with-values
+        (lambda () (http-get uri #:keep-alive? #f))
+      (lambda (request body) (utf8->string body)))))
+
+(define (couchdb-doc-delete db id rev)
+  (let ((uri (couchdb-make-uri-with-query (string-append "/" db "/" id) (string-append "rev=" rev))))
+    (call-with-values
+        (lambda () (http-delete uri #:keep-alive? #f ))
+      (lambda (request body) (utf8->string body)))))
+
+(define (couchdb-doc-get cdb id)
+  (let ((uri (couchdb-make-uri (string-append "/" cdb "/" id "?include_docs=true"))))
+    (call-with-values
+        (lambda () (http-get uri #:decode-body? #t #:keep-alive? #f))
+      (lambda (request body) (utf8->string body)))))
+
+(define (couchdb-doc-insert db id json)
+  (let ((uri (couchdb-make-uri (string-append "/" db "/" id))))
+    (call-with-values
+        (lambda () (http-put uri #:keep-alive? #f #:body json))
+      (lambda (request body) (utf8->string body)))))
+
+(define (couchdb-doc-list cdb)
+  (let ((uri (couchdb-make-uri (string-append "/" cdb "?include_docs=true"))))
     (call-with-values
         (lambda () (http-get uri #:keep-alive? #f))
       (lambda (request body) (utf8->string body)))))
