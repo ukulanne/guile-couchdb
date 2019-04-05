@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-05 04:17:47 panda> 
+;; Time-stamp: <2019-04-05 04:22:46 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -27,7 +27,7 @@
   #:use-module (web uri)
   #:use-module (web client)
   #:export (couchdb-db-create couchdb-db-list couchdb-doc-delete couchdb-doc-get couchdb-doc-insert couchdb-doc-list 
-            couchdb-server-info couchdb-server! couchdb-up? couchdb-version couchdb-uuids))
+            couchdb-root couchdb-server-info couchdb-server! couchdb-up? couchdb-version couchdb-uuids))
 
 ;; SERVER
 ;; (couchdb-root)

@@ -9,7 +9,7 @@
 ;; Couchdb guile wrapper test    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-05 00:01:30 panda> 
+;; Time-stamp: <2019-04-05 04:22:08 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -66,3 +66,5 @@
 ;;(newline)
 ;;(display (couchdb-list "panda"))
 (display (couchdb-uuids "4"))
+(newline)
+(display (couchdb-root))
