@@ -28,7 +28,7 @@ Happy Scheming!
 
 # API
 
-## Server
+### Server
  ```
  (couchdb-root)
  (couchdb-server! url port)
@@ -37,14 +37,14 @@ Happy Scheming!
  (couchdb-uuids n)
  (couchdb-version)
 ```
-## DATABASE
+### Database
 ```
  (couchdb-db-create db)
  (couchdb-db-index db)
  (couchdb-db-list)
  (couchdb-db-find selector)
 ``` 
- ## DOC
+ ## Doc
  ```
  (couchdb-doc-delete cdb id)
  (couchdb-doc-get cdb id)
