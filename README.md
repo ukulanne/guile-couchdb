@@ -27,20 +27,27 @@ Happy Scheming!
 ```
 
 # API
+```
+ SERVER
+ (couchdb-root)
+ (couchdb-server! url port)
+ (couchdb-server-info)
+ (couchdb-up?) 
+ (couchdb-uuids n)
+ (couchdb-version)
+ DATABASE
+ (couchdb-db-create db)
+ (couchdb-db-index db)
+ (couchdb-db-list)
+ (couchdb-db-find selector)
+ DOC
+ (couchdb-doc-delete cdb id)
+ (couchdb-doc-get cdb id)
+ (couchdb-doc-insert cdb id . rev)
+ (couchdb-doc-index cdb)
+ (couchdb-doc-list cdb)
 
-`(couchdb-create db)`
-
-`(coucdhb-db-delete db)`
-
-`(couchdb-get cdb id)`
-
-`(couchdb-insert cdb id . rev)`
-
-`(couchdb-list cdb)`
-
-`(couchdb-delete cdb id)`
-
-`(couchdb-version)`
+```
 
 # test.scm
 
