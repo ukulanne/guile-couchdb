@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-05 04:25:00 panda> 
+;; Time-stamp: <2019-04-05 04:27:20 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -29,32 +29,12 @@
   #:export (couchdb-db-create couchdb-db-list couchdb-doc-delete couchdb-doc-get couchdb-doc-insert couchdb-doc-list 
             couchdb-root couchdb-server-info couchdb-server! couchdb-up? couchdb-version couchdb-uuids))
 
-;; SERVER
-;; (couchdb-root)
-;; (couchdb-server! url port)
-;; (couchdb-server-info)
-;; (couchdb-up?) 
-;; (couchdb-uuids n)
-;; (couchdb-version)
-;; DATABASE
-;; (couchdb-db-create db)
-;; (couchdb-db-index db)
-;; (couchdb-db-list)
-;; (couchdb-db-find selector)
-;; DOC
-;; (couchdb-doc-delete cdb id)
-;; (couchdb-doc-get cdb id)
-;; (couchdb-doc-insert cdb id . rev)
-;; (couchdb-doc-index cdb)
-;; (couchdb-doc-list cdb)
 
 (define COUCHDB-SERVER "localhost")
 (define COUCHDB-PORT 5984)
 (define COUCHDB-USER #f)
 (define COUCHDB-PASSWORD #f)
 
-(define* (couchdb-make-uri path #:optional (query #f))
-  (build-uri 'http #:host COUCHDB-SERVER #:port COUCHDB-PORT #:path path #:query query))
 (define* (make-uri path #:optional (query #f))
   (build-uri 'http #:host COUCHDB-SERVER #:port COUCHDB-PORT #:path path #:query query))
 
@@ -70,6 +50,7 @@
 (define (couchdb-server! url port)
   (set! COUCHDB-SERVER url)
   (set! COUCHDB-PORT port))
+
 (define-couchdb-api couchdb-root http-get "/")
 (define-couchdb-api couchdb-up? http-get "/_up")
 (define-couchdb-api couchdb-version http-get "")
@@ -100,5 +81,3 @@
     (call-with-values
         (lambda () (http-get uri #:keep-alive? #f))
       (lambda (request body) (utf8->string body)))))
-
-
