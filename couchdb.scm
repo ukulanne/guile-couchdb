@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-04 23:58:49 panda> 
+;; Time-stamp: <2019-04-05 00:01:43 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -74,8 +74,7 @@
 (define-couchdb-api couchdb-version http-get "")
 (define-couchdb-api couchdb-db-list http-get "/_all_dbs")
 (define-couchdb-api couchdb-db-create http-put "/")
-
-(define-couchdb-api couchdb-uuids http-get "/_uuids?count=2")
+(define-couchdb-api couchdb-uuids http-get "/_uuids?count=")
 
 (define (couchdb-doc-delete db id rev)
   (let ((uri (couchdb-make-uri (string-append "/" db "/" id) (string-append "rev=" rev))))
