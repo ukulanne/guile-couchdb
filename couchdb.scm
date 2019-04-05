@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-05 00:01:43 panda> 
+;; Time-stamp: <2019-04-05 04:17:47 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -30,6 +30,7 @@
             couchdb-server-info couchdb-server! couchdb-up? couchdb-version couchdb-uuids))
 
 ;; SERVER
+;; (couchdb-root)
 ;; (couchdb-server! url port)
 ;; (couchdb-server-info)
 ;; (couchdb-up?) 
@@ -69,7 +70,7 @@
 (define (couchdb-server! url port)
   (set! COUCHDB-SERVER url)
   (set! COUCHDB-PORT port))
-
+(define-couchdb-api couchdb-root http-get "/")
 (define-couchdb-api couchdb-up? http-get "/_up")
 (define-couchdb-api couchdb-version http-get "")
 (define-couchdb-api couchdb-db-list http-get "/_all_dbs")
