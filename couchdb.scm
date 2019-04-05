@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-03-29 22:46:28 panda> 
+;; Time-stamp: <2019-04-04 23:58:49 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -27,7 +27,7 @@
   #:use-module (web uri)
   #:use-module (web client)
   #:export (couchdb-db-create couchdb-db-list couchdb-doc-delete couchdb-doc-get couchdb-doc-insert couchdb-doc-list 
-            couchdb-server-info couchdb-server! couchdb-up? couchdb-version))
+            couchdb-server-info couchdb-server! couchdb-up? couchdb-version couchdb-uuids))
 
 ;; SERVER
 ;; (couchdb-server! url port)
@@ -74,6 +74,8 @@
 (define-couchdb-api couchdb-version http-get "")
 (define-couchdb-api couchdb-db-list http-get "/_all_dbs")
 (define-couchdb-api couchdb-db-create http-put "/")
+
+(define-couchdb-api couchdb-uuids http-get "/_uuids?count=2")
 
 (define (couchdb-doc-delete db id rev)
   (let ((uri (couchdb-make-uri (string-append "/" db "/" id) (string-append "rev=" rev))))
