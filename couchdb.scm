@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-05 04:22:46 panda> 
+;; Time-stamp: <2019-04-05 04:25:00 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -78,25 +78,25 @@
 (define-couchdb-api couchdb-uuids http-get "/_uuids?count=")
 
 (define (couchdb-doc-delete db id rev)
-  (let ((uri (couchdb-make-uri (string-append "/" db "/" id) (string-append "rev=" rev))))
+  (let ((uri (make-uri (string-append "/" db "/" id) (string-append "rev=" rev))))
     (call-with-values
         (lambda () (http-delete uri #:keep-alive? #f ))
       (lambda (request body) (utf8->string body)))))
 
 (define (couchdb-doc-get cdb id)
-  (let ((uri (couchdb-make-uri (string-append "/" cdb "/" id "?include_docs=true"))))
+  (let ((uri (make-uri (string-append "/" cdb "/" id "?include_docs=true"))))
     (call-with-values
         (lambda () (http-get uri #:decode-body? #t #:keep-alive? #f))
       (lambda (request body) (utf8->string body)))))
 
 (define (couchdb-doc-insert db id json)
-  (let ((uri (couchdb-make-uri (string-append "/" db "/" id))))
+  (let ((uri (make-uri (string-append "/" db "/" id))))
     (call-with-values
         (lambda () (http-put uri #:keep-alive? #f #:body json))
       (lambda (request body) (utf8->string body)))))
 
 (define (couchdb-doc-list cdb)
-  (let ((uri (couchdb-make-uri (string-append "/" cdb "?include_docs=true"))))
+  (let ((uri (make-uri (string-append "/" cdb "?include_docs=true"))))
     (call-with-values
         (lambda () (http-get uri #:keep-alive? #f))
       (lambda (request body) (utf8->string body)))))
