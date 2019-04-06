@@ -19,15 +19,18 @@ To be able to connect through https you will [gnutls-guile bindings](https://www
 
 # INSTALL
 ```
+[panda@pandaville guile-couchdb]$ sudo ./install.scm 
 [HELLO] Installer script for guile-couchdb
 [INFO] Running under: Linux x86_64
 [INFO] Guile version: 2.9.1
 [INFO] Guile library dir: /usr/local/share/guile/3.0
 [INFO] Module guile-json found
+[WARN] Module gnutls-guile not found
 [INFO] Installing couchdb.scm module...
 [INFO] Installation was succesful
 [INFO] You can now use couchdb.scm with (use-modules (couchdb))
 [BUH-BYE] Happy scheming!
+
 ```
 
 # API
