@@ -9,7 +9,7 @@
 ;; Couchdb guile module installer  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-03-28 20:57:51 panda> 
+;; Time-stamp: <2019-04-05 23:11:38 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -28,6 +28,7 @@
 
 (define *COUCHDB-FILE* "couchdb.scm")
 (define gj-msg "[INFO] Module guile-json found\n")
+(define gtls-msg "[INFO] Module gnutls-guile found\n")
 (define u (uname))
 
 (display "[HELLO] Installer script for guile-couchdb\n")
@@ -36,8 +37,12 @@
 (display (apply string-append `("[INFO] Guile library dir: " ,(%library-dir) "\n")))
 (catch #t
        (lambda () (use-modules (json)))
-       (lambda (k . p) (set! gj-msg "[WARN] You don't have guile-json installed\n")))
+       (lambda (k . p) (set! gj-msg "[WARN] Module guile-json not found\n")))
+(catch #t
+       (lambda () (use-modules (gnutls)))
+       (lambda (k . p) (set! gtls-msg "[WARN] Module gnutls-guile not found\n")))
 (display gj-msg)
+(display gtls-msg)
 (display "[INFO] Installing couchdb.scm module...\n")
 (copy-file *COUCHDB-FILE* (string-append (%library-dir) "/" *COUCHDB-FILE*))
 (display "[INFO] Installation was succesful\n")
