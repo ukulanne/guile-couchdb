@@ -14,12 +14,11 @@ Happy Scheming!
 - I use couchdb for Fedora from this [copr](https://copr.fedorainfracloud.org/coprs/adrienverge/couchdb/) and [github](https://github.com/adrienverge/copr-couchdb)
 - test.scm uses [guile-json 3.1.0](https://github.com/aconchillo/guile-json) 
 
-To be able to connect through https you will [gnutls-guile bindings](https://www.gnutls.org/manual/gnutls-guile.html).
+To be able to connect through https you need to get [gnutls-guile bindings](https://www.gnutls.org/manual/gnutls-guile.html).
 
 # INSTALL
 
-To install couchb.scm simplu run `install.scm`. The script will automatically install the module to the correct path as given by the guile calling the script on the first line of the script. Please change in case you want the install script to pick a different guile.
-
+To install couchb.scm simply run `install.scm`. The script will automatically install the module to the correct path as given by the guile calling the script on the first line of the script. Please change in case you want the install script to pick a different guile.
 
 
 ```
@@ -34,7 +33,6 @@ To install couchb.scm simplu run `install.scm`. The script will automatically in
 [INFO] Installation was succesful
 [INFO] You can now use couchdb.scm with (use-modules (couchdb))
 [BUH-BYE] Happy scheming!
-
 ```
 
 # API
@@ -48,6 +46,7 @@ To install couchb.scm simplu run `install.scm`. The script will automatically in
  (couchdb-uuids n)
  (couchdb-version)
 ```
+
 ### Database
 ```
  (couchdb-db-create cdb)
@@ -55,7 +54,8 @@ To install couchb.scm simplu run `install.scm`. The script will automatically in
  (couchdb-db-list)
  (couchdb-db-find selector)
 ``` 
- ## Doc
+
+## Doc
  ```
  (couchdb-doc-delete cdb id)
  (couchdb-doc-get cdb id)
