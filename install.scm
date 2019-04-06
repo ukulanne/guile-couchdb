@@ -9,7 +9,9 @@
 ;; Couchdb guile module installer  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-05 23:12:23 panda> 
+;; Time-stamp: <2019-04-06 16:46:03 panda> 
+
+;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;

@@ -5,7 +5,9 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-06 16:42:00 panda> 
+;; Time-stamp: <2019-04-06 16:45:32 panda> 
+
+;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -39,7 +41,7 @@
 (define* (make-uri path #:optional (query #f)) (build-uri 'http #:host COUCHDB-SERVER #:port COUCHDB-PORT #:path path #:query query))
 
 (define-macro (define-couchdb-api api verb path tail)
-  `(define* (,api  . args)
+  `(define* (,api . args)
      (let ((uri (make-uri (string-append ,path (apply string-append (map (lambda (x) (string-append x "/")) args)) ,tail))))
        (call/wv (lambda () (,verb uri #:decode-body? #t #:keep-alive? #f))
                 (lambda (request body) (utf8->string body))))))

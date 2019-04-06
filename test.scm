@@ -9,7 +9,9 @@
 ;; Couchdb guile wrapper test    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-06 16:22:24 panda> 
+;; Time-stamp: <2019-04-06 16:45:48 panda> 
+
+;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
