@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-06 16:45:32 panda> 
+;; Time-stamp: <2019-04-06 17:23:07 panda> 
 
 ;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
 
@@ -29,7 +29,7 @@
   #:use-module (web uri)
   #:use-module (web client)
   #:export (couchdb-db-create couchdb-db-changes couchdb-db-list couchdb-db-all-docs couchdb-doc-delete
-            couchdb-doc-get couchdb-doc-insert couchdb-doc-list couchdb-root couchdb-server-info
+            couchdb-doc-get couchdb-doc-insert  couchdb-db-insert-bulk couchdb-doc-list couchdb-root couchdb-server-info
             couchdb-server! couchdb-up? couchdb-version couchdb-uuids))
 
 (define COUCHDB-SERVER "localhost")
@@ -43,9 +43,15 @@
 (define-macro (define-couchdb-api api verb path tail)
   `(define* (,api . args)
      (let ((uri (make-uri (string-append ,path (apply string-append (map (lambda (x) (string-append x "/")) args)) ,tail))))
-       (call/wv (lambda () (,verb uri #:decode-body? #t #:keep-alive? #f))
+       (call/wv (lambda () (,verb uri #:decode-body? #t #:keep-alive? #t))
                 (lambda (request body) (utf8->string body))))))
-      
+
+(define-macro (define-couchdb-api-body api verb path tail) 
+  `(define (,api cdb id json)
+    (let ((uri (make-uri (string-append ,path cdb "/" id ,tail))))
+      (call/wv (lambda () (,verb uri #:keep-alive? #f #:body json #:headers `((content-type . (application/json)))))
+               (lambda (request body) (utf8->string body))))))
+
 (define (couchdb-server-info) (string-append "http://" COUCHDB-SERVER ":" (number->string COUCHDB-PORT)))
 (define (couchdb-server! url port) (set! COUCHDB-SERVER url) (set! COUCHDB-PORT port))
 
@@ -65,7 +71,5 @@
     (call/wv (lambda () (http-delete uri #:keep-alive? #f ))
              (lambda (request body) (utf8->string body)))))
 
-(define (couchdb-doc-insert cdb id json)
-  (let ((uri (make-uri (string-append "/" cdb "/" id))))
-    (call/wv (lambda () (http-put uri #:keep-alive? #f #:body json))
-             (lambda (request body) (utf8->string body)))))
+(define-couchdb-api-body couchdb-doc-insert http-put "/" "")
+(define-couchdb-api-body couchdb-db-insert-bulk http-post "/" "_bulk_docs")

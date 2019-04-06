@@ -9,7 +9,7 @@
 ;; Couchdb guile wrapper test    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-06 16:45:48 panda> 
+;; Time-stamp: <2019-04-06 17:07:51 panda> 
 
 ;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
 
@@ -34,6 +34,7 @@
 ;; Strings can be used to insert as documents:
 (define tohui-json "{\"_id\": \"tohui\",\"name\": \"Tohui Panda\",\"country\": \"Mexico\"}")
 (define po-json "{\"_id\": \"po\",\"name\": \"Po Kung Fu Panda\",\"country\": \"USA\"}")
+(define bulk-json "{\"docs\": [{\"_id\": \"Pandette\"},{\"_id\" : \"Ying_ying\"}]}")
 
 ;; Scheme objects can be used and then turned into a json string thanks to guile-json
 (define xiao-json '(("_id" . "xiao")
@@ -73,5 +74,6 @@
 (display (couchdb-root))
 (display "[COUCHDB] Display all documents:")
 (display (couchdb-db-all-docs "panda"))
+(display (couchdb-db-insert-bulk "panda" "" bulk-json))
 ;;(display "[COUCHDB] Display all changes:")
 ;;(display (couchdb-db-changes "panda"))
