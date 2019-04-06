@@ -1,8 +1,7 @@
 # guile-couchdb
 
-Hello. This library is work in progress. Why would you like to use it? I don't know. Not sure how many pandas are out there
-are interested in guile and couchdb but please free to reach out with any issue or comments. API will be changing rapidly
-so bear with me.
+Welcome to the fascinating world of Guile, Scheme and Couchdb. Why would you like to use it? I don't know. Not sure how many pandas are out there interested but please free to reach out with any issue or comments. API will be changing rapidly
+so bear with me. My intentions is to wrap every single couchdb API function.
 
 guile-couchdb wraps [couchdb's REST API](https://docs.couchdb.org/en/stable/api/index.html).
 
@@ -46,8 +45,8 @@ To be able to connect through https you will [gnutls-guile bindings](https://www
 ```
 ### Database
 ```
- (couchdb-db-create db)
- (couchdb-db-index db)
+ (couchdb-db-create cdb)
+ (couchdb-db-index cdb)
  (couchdb-db-list)
  (couchdb-db-find selector)
 ``` 
