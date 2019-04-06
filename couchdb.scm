@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-06 17:27:21 panda> 
+;; Time-stamp: <2019-04-06 17:43:48 panda> 
 
 ;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
 
@@ -32,13 +32,14 @@
             couchdb-doc-get couchdb-doc-insert  couchdb-db-insert-bulk couchdb-doc-list couchdb-root couchdb-server-info
             couchdb-server! couchdb-up? couchdb-version couchdb-uuids))
 
-(define COUCHDB-SERVER "localhost")
-(define COUCHDB-PORT 5984)
-(define COUCHDB-USER #f)
-(define COUCHDB-PASSWORD #f)
+(define CDB-PROTOCOL 'http)
+(define CDB-SERVER "localhost")
+(define CDB-PORT 5984)
+(define CDB-USER #f)
+(define CDDB-PASSWORD #f)
 
 (define call/wv call-with-values)
-(define* (make-uri path #:optional (query #f)) (build-uri 'http #:host COUCHDB-SERVER #:port COUCHDB-PORT #:path path #:query query))
+(define* (make-uri path #:optional (query #f)) (build-uri CDB-PROTOCOL #:host CDB-SERVER #:port CDB-PORT #:path path #:query query))
 
 (define-macro (define-couchdb-api api verb path tail)
   `(define* (,api . args)
@@ -52,8 +53,8 @@
       (call/wv (lambda () (,verb uri #:keep-alive? #f #:body json #:headers `((content-type . (application/json)))))
                (lambda (request body) (utf8->string body))))))
 
-(define (couchdb-server-info) (string-append "http://" COUCHDB-SERVER ":" (number->string COUCHDB-PORT)))
-(define (couchdb-server! url port) (set! COUCHDB-SERVER url) (set! COUCHDB-PORT port))
+(define (couchdb-server-info) (string-append "http://" CDB-SERVER ":" (number->string CDB-PORT)))
+(define (couchdb-server! url port) (set! CDB-SERVER url) (set! CD-PORT port))
 
 (define-couchdb-api couchdb-root        http-get "/" "")
 (define-couchdb-api couchdb-up?         http-get "/_up" "")
@@ -65,6 +66,7 @@
 (define-couchdb-api couchdb-db-all-docs http-get  "/" "/_all_docs")
 (define-couchdb-api couchdb-doc-list    http-get "/" "?include_docs=true")
 (define-couchdb-api couchdb-doc-get     http-get "/"  "?include_docs=true")
+
 (define-couchdb-api-body couchdb-doc-insert http-put "/" "")
 (define-couchdb-api-body couchdb-db-insert-bulk http-post "/" "_bulk_docs")
 
