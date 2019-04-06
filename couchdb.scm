@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-06 16:31:30 panda> 
+;; Time-stamp: <2019-04-06 16:41:27 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -41,7 +41,7 @@
 (define-macro (define-couchdb-api api verb path tail)
   `(define* (,api  . args)
      (let ((uri (make-uri (string-append ,path (apply string-append (map (lambda (x) (string-append x "/")) args)) ,tail))))
-       (display (uri->string uri))
+       ;;(display (uri->string uri))
        (call/wv (lambda () (,verb uri #:decode-body? #t #:keep-alive? #f))
                 (lambda (request body) (utf8->string body))))))
       
