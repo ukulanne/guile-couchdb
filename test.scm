@@ -9,7 +9,7 @@
 ;; Couchdb guile wrapper test    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-06 17:34:10 panda> 
+;; Time-stamp: <2019-04-06 18:12:55 panda> 
 
 ;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
 
@@ -40,6 +40,8 @@
 (define xiao-json '(("_id" . "xiao")
                     ("name" . "Xiao Liwu")
                     ("country" . "China")))
+
+(couchdb-server! 'https "localhost" 5984)
 
 (display "[INFO]    couchdb test using: ")
 (display (couchdb-server-info))

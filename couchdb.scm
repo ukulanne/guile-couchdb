@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-06 17:43:48 panda> 
+;; Time-stamp: <2019-04-06 18:14:23 panda> 
 
 ;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
 
@@ -53,8 +53,14 @@
       (call/wv (lambda () (,verb uri #:keep-alive? #f #:body json #:headers `((content-type . (application/json)))))
                (lambda (request body) (utf8->string body))))))
 
-(define (couchdb-server-info) (string-append "http://" CDB-SERVER ":" (number->string CDB-PORT)))
-(define (couchdb-server! url port) (set! CDB-SERVER url) (set! CD-PORT port))
+(define (couchdb-server-info) (string-append (symbol->string CDB-PROTOCOL) "://" CDB-SERVER ":" (number->string CDB-PORT)))
+(define (couchdb-server! protocol url port)
+  (set! CDB-PROTOCOL protocol)
+  (catch #t
+         (lambda () (if  (equal? 'https protocol)(use-modules (gnutls))))
+         (lambda (k . p) (display "[ERROR] Module gnutls-guile not found and https cannot be used\n")(quit)))
+  (set! CDB-SERVER url)
+  (set! CDB-PORT port))
 
 (define-couchdb-api couchdb-root        http-get "/" "")
 (define-couchdb-api couchdb-up?         http-get "/_up" "")
