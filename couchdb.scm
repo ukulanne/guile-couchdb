@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-06 17:26:53 panda> 
+;; Time-stamp: <2019-04-06 17:27:21 panda> 
 
 ;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
 
@@ -43,7 +43,7 @@
 (define-macro (define-couchdb-api api verb path tail)
   `(define* (,api . args)
      (let ((uri (make-uri (string-append ,path (apply string-append (map (lambda (x) (string-append x "/")) args)) ,tail))))
-       (call/wv (lambda () (,verb uri #:decode-body? #t #:keep-alive? #t  #:headers `((content-type . (application/json)))
+       (call/wv (lambda () (,verb uri #:decode-body? #t #:keep-alive? #t  #:headers `((content-type . (application/json)))))
                 (lambda (request body) (utf8->string body))))))
 
 (define-macro (define-couchdb-api-body api verb path tail) 

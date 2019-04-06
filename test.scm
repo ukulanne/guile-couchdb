@@ -9,7 +9,7 @@
 ;; Couchdb guile wrapper test    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-06 17:07:51 panda> 
+;; Time-stamp: <2019-04-06 17:34:10 panda> 
 
 ;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
 
@@ -74,6 +74,10 @@
 (display (couchdb-root))
 (display "[COUCHDB] Display all documents:")
 (display (couchdb-db-all-docs "panda"))
+(display "[COUCHDB] Bulk insert\n")
 (display (couchdb-db-insert-bulk "panda" "" bulk-json))
+(display "[COUCHDB] Remove the pandas we just inserted\n")
+(display (couchdb-doc-delete "panda" "Pandette" (cdr (assoc "_rev" (json-string->scm (couchdb-doc-get "panda" "Pandette"))))))
+(display (couchdb-doc-delete "panda" "Ying_ying" (cdr (assoc "_rev" (json-string->scm (couchdb-doc-get "panda" "Ying_ying"))))))
 ;;(display "[COUCHDB] Display all changes:")
 ;;(display (couchdb-db-changes "panda"))
