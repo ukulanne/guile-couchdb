@@ -9,7 +9,7 @@
 ;; Couchdb guile wrapper test    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-05 04:22:08 panda> 
+;; Time-stamp: <2019-04-06 16:22:24 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -65,6 +65,11 @@
 ;;(display "[COUCHDB] Get all from db panda\n")
 ;;(newline)
 ;;(display (couchdb-list "panda"))
-(display (couchdb-uuids "4"))
-(newline)
+(display "[COUCHDB] Get 3 uuids: ")
+(display (couchdb-uuids "3"))
+(display "[COUCHDB] Show server root")
 (display (couchdb-root))
+(display "[COUCHDB] Display all documents:")
+(display (couchdb-db-all-docs "panda"))
+;;(display "[COUCHDB] Display all changes:")
+;;(display (couchdb-db-changes "panda"))
