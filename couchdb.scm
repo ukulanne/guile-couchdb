@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-06 17:23:07 panda> 
+;; Time-stamp: <2019-04-06 17:26:53 panda> 
 
 ;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
 
@@ -43,7 +43,7 @@
 (define-macro (define-couchdb-api api verb path tail)
   `(define* (,api . args)
      (let ((uri (make-uri (string-append ,path (apply string-append (map (lambda (x) (string-append x "/")) args)) ,tail))))
-       (call/wv (lambda () (,verb uri #:decode-body? #t #:keep-alive? #t))
+       (call/wv (lambda () (,verb uri #:decode-body? #t #:keep-alive? #t  #:headers `((content-type . (application/json)))
                 (lambda (request body) (utf8->string body))))))
 
 (define-macro (define-couchdb-api-body api verb path tail) 
@@ -65,11 +65,10 @@
 (define-couchdb-api couchdb-db-all-docs http-get  "/" "/_all_docs")
 (define-couchdb-api couchdb-doc-list    http-get "/" "?include_docs=true")
 (define-couchdb-api couchdb-doc-get     http-get "/"  "?include_docs=true")
+(define-couchdb-api-body couchdb-doc-insert http-put "/" "")
+(define-couchdb-api-body couchdb-db-insert-bulk http-post "/" "_bulk_docs")
 
 (define (couchdb-doc-delete db id rev)
   (let ((uri (make-uri (string-append "/" db "/" id) (string-append "rev=" rev))))
     (call/wv (lambda () (http-delete uri #:keep-alive? #f ))
              (lambda (request body) (utf8->string body)))))
-
-(define-couchdb-api-body couchdb-doc-insert http-put "/" "")
-(define-couchdb-api-body couchdb-db-insert-bulk http-post "/" "_bulk_docs")
