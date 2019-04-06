@@ -1,8 +1,10 @@
 # guile-couchdb
 
-Hello. This library is work in progress. Why would you like to use it? I don't know. Not sure how many pandas out there
+Hello. This library is work in progress. Why would you like to use it? I don't know. Not sure how many pandas are out there
 are interested in guile and couchdb but please free to reach out with any issue or comments. API will be changing rapidly
 so bear with me.
+
+guile-couchdb wraps [couchdb's REST API](https://docs.couchdb.org/en/stable/api/index.html).
 
 Happy Scheming!
 
@@ -12,6 +14,8 @@ Happy Scheming!
 - A [couchdb](http://couchdb.apache.org/) server to connect to. Tested with 2.3.x but should work with older versions
 - I use couchdb for Fedora from this [copr](https://copr.fedorainfracloud.org/coprs/adrienverge/couchdb/) and [github](https://github.com/adrienverge/copr-couchdb)
 - test.scm uses [guile-json 3.1.0](https://github.com/aconchillo/guile-json) 
+
+To be able to connect through https you will [gnutls-guile bindings](https://www.gnutls.org/manual/gnutls-guile.html).
 
 # INSTALL
 ```
@@ -23,7 +27,7 @@ Happy Scheming!
 [INFO] Installing couchdb.scm module...
 [INFO] Installation was succesful
 [INFO] You can now use couchdb.scm with (use-modules (couchdb))
-[BYE] Happy scheming!
+[BUH-BYE] Happy scheming!
 ```
 
 # API
