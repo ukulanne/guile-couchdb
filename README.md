@@ -59,7 +59,7 @@ To install couchb.scm simply run `install.scm`. The script will automatically in
  ```
  (couchdb-doc-delete cdb id)
  (couchdb-doc-get cdb id)
- (couchdb-doc-insert cdb id . rev)
+ (couchdb-doc-insert cdb id json)
  (couchdb-doc-index cdb)
  (couchdb-doc-list cdb)
 
