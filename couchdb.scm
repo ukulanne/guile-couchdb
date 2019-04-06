@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-06 16:23:07 panda> 
+;; Time-stamp: <2019-04-06 16:31:30 panda> 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
@@ -35,15 +35,15 @@
 (define COUCHDB-USER #f)
 (define COUCHDB-PASSWORD #f)
 
+(define call/wv call-with-values)
 (define* (make-uri path #:optional (query #f)) (build-uri 'http #:host COUCHDB-SERVER #:port COUCHDB-PORT #:path path #:query query))
 
 (define-macro (define-couchdb-api api verb path tail)
   `(define* (,api  . args)
      (let ((uri (make-uri (string-append ,path (apply string-append (map (lambda (x) (string-append x "/")) args)) ,tail))))
        (display (uri->string uri))
-       (call-with-values
-           (lambda () (,verb uri #:decode-body? #t #:keep-alive? #f))
-         (lambda (request body) (utf8->string body))))))
+       (call/wv (lambda () (,verb uri #:decode-body? #t #:keep-alive? #f))
+                (lambda (request body) (utf8->string body))))))
       
 (define (couchdb-server-info) (string-append "http://" COUCHDB-SERVER ":" (number->string COUCHDB-PORT)))
 (define (couchdb-server! url port) (set! COUCHDB-SERVER url) (set! COUCHDB-PORT port))
@@ -61,12 +61,10 @@
 
 (define (couchdb-doc-delete db id rev)
   (let ((uri (make-uri (string-append "/" db "/" id) (string-append "rev=" rev))))
-    (call-with-values
-        (lambda () (http-delete uri #:keep-alive? #f ))
-      (lambda (request body) (utf8->string body)))))
+    (call/wv (lambda () (http-delete uri #:keep-alive? #f ))
+             (lambda (request body) (utf8->string body)))))
 
 (define (couchdb-doc-insert cdb id json)
   (let ((uri (make-uri (string-append "/" cdb "/" id))))
-    (call-with-values
-        (lambda () (http-put uri #:keep-alive? #f #:body json))
-      (lambda (request body) (utf8->string body)))))
+    (call/wv (lambda () (http-put uri #:keep-alive? #f #:body json))
+             (lambda (request body) (utf8->string body)))))
