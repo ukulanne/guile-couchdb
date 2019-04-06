@@ -1,8 +1,7 @@
 # guile-couchdb
 
-Hello. This library is work in progress. Why would you like to use it? I don't know. Not sure how many pandas are out there
-are interested in guile and couchdb but please free to reach out with any issue or comments. API will be changing rapidly
-so bear with me.
+Welcome to the fascinating world of Guile, Scheme and Couchdb. Why would you like to use it? I don't know. Not sure how many pandas are out there interested but please free to reach out with any issue or comments. API will be changing rapidly
+so bear with me. My intentions is to wrap every single couchdb API function.
 
 guile-couchdb wraps [couchdb's REST API](https://docs.couchdb.org/en/stable/api/index.html).
 
@@ -15,15 +14,21 @@ Happy Scheming!
 - I use couchdb for Fedora from this [copr](https://copr.fedorainfracloud.org/coprs/adrienverge/couchdb/) and [github](https://github.com/adrienverge/copr-couchdb)
 - test.scm uses [guile-json 3.1.0](https://github.com/aconchillo/guile-json) 
 
-To be able to connect through https you will [gnutls-guile bindings](https://www.gnutls.org/manual/gnutls-guile.html).
+To be able to connect through https you need to get [gnutls-guile bindings](https://www.gnutls.org/manual/gnutls-guile.html).
 
 # INSTALL
+
+To install couchb.scm simply run `install.scm`. The script will automatically install the module to the correct path as given by the guile calling the script on the first line of the script. Please change in case you want the install script to pick a different guile.
+
+
 ```
+[panda@pandaville guile-couchdb]$ sudo ./install.scm 
 [HELLO] Installer script for guile-couchdb
 [INFO] Running under: Linux x86_64
 [INFO] Guile version: 2.9.1
 [INFO] Guile library dir: /usr/local/share/guile/3.0
 [INFO] Module guile-json found
+[WARN] Module gnutls-guile not found
 [INFO] Installing couchdb.scm module...
 [INFO] Installation was succesful
 [INFO] You can now use couchdb.scm with (use-modules (couchdb))
@@ -41,14 +46,16 @@ To be able to connect through https you will [gnutls-guile bindings](https://www
  (couchdb-uuids n)
  (couchdb-version)
 ```
+
 ### Database
 ```
- (couchdb-db-create db)
- (couchdb-db-index db)
+ (couchdb-db-create cdb)
+ (couchdb-db-index cdb)
  (couchdb-db-list)
  (couchdb-db-find selector)
 ``` 
- ## Doc
+
+## Doc
  ```
  (couchdb-doc-delete cdb id)
  (couchdb-doc-get cdb id)
