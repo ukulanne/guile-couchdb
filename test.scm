@@ -1,4 +1,4 @@
-#!/usr/local/bin/guile \
+#!/usr//bin/guile \
 --no-auto-compile -s
 !#
 
@@ -9,7 +9,7 @@
 ;; Couchdb guile wrapper test    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-06 18:12:55 panda> 
+;; Time-stamp: <2019-04-06 19:10:58 panda> 
 
 ;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
 
@@ -42,6 +42,10 @@
                     ("country" . "China")))
 
 (couchdb-server! 'https "localhost" 5984)
+
+;;(catch #t
+  ;;     (lambda () (use-modules (gnutls)))
+    ;;   (lambda (k . p) (display  "[WARN] Module gnutls-guile not found\n")))
 
 (display "[INFO]    couchdb test using: ")
 (display (couchdb-server-info))

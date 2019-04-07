@@ -1,4 +1,4 @@
-#!/usr/local/bin/guile \
+#!/usr/bin/guile \
 --no-auto-compile -s 
 !#
 
@@ -9,7 +9,7 @@
 ;; Couchdb guile module installer  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-06 16:46:03 panda> 
+;; Time-stamp: <2019-04-06 19:00:07 panda> 
 
 ;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
 
