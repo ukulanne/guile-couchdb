@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-06 19:11:31 panda> 
+;; Time-stamp: <2019-04-08 21:37:55 panda> 
 
 ;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
 
@@ -28,7 +28,7 @@
   #:use-module (rnrs bytevectors) 
   #:use-module (web uri)
   #:use-module (web client)
-  #:export (couchdb-db-create couchdb-db-changes couchdb-db-list couchdb-db-all-docs couchdb-doc-delete
+  #:export (couchdb-db-bulk-get couchdb-db-create couchdb-db-changes couchdb-db-list couchdb-db-all-docs couchdb-doc-delete
             couchdb-doc-get couchdb-doc-insert  couchdb-db-insert-bulk couchdb-doc-list couchdb-root couchdb-server-info
             couchdb-server! couchdb-up? couchdb-version couchdb-uuids))
 
@@ -75,6 +75,7 @@
 
 (define-couchdb-api-body couchdb-doc-insert http-put "/" "")
 (define-couchdb-api-body couchdb-db-insert-bulk http-post "/" "_bulk_docs")
+(define-couchdb-api-body couchdb-db-bulk-get http-post "/" "/_bulk_get")
 
 (define (couchdb-doc-delete db id rev)
   (let ((uri (make-uri (string-append "/" db "/" id) (string-append "rev=" rev))))

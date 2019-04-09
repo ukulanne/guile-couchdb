@@ -9,7 +9,7 @@
 ;; Couchdb guile wrapper test    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-06 19:17:44 panda> 
+;; Time-stamp: <2019-04-08 21:38:38 panda> 
 
 ;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
 
@@ -28,8 +28,7 @@
 ;;    along with this program.  If not, see <https://www.gnu.org/licenses/>.       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-modules (couchdb)
-             (json))
+(use-modules (couchdb) (json))
 
 ;; Strings can be used to insert as documents:
 (define tohui-json "{\"_id\": \"tohui\",\"name\": \"Tohui Panda\",\"country\": \"Mexico\"}")
@@ -41,11 +40,8 @@
                     ("name" . "Xiao Liwu")
                     ("country" . "China")))
 
+;;Whenever you try to set https as the protocol, guile loads it if available
 (couchdb-server! 'https "localhost" 5984)
-
-;;(catch #t
-  ;;     (lambda () (use-modules (gnutls)))
-    ;;   (lambda (k . p) (display  "[WARN] Module gnutls-guile not found\n")))
 
 (display "[INFO]    couchdb test using: ")
 (display (couchdb-server-info))
@@ -86,4 +82,7 @@
 (display (couchdb-doc-delete "panda" "Pandette" (cdr (assoc "_rev" (json-string->scm (couchdb-doc-get "panda" "Pandette"))))))
 (display (couchdb-doc-delete "panda" "Ying_ying" (cdr (assoc "_rev" (json-string->scm (couchdb-doc-get "panda" "Ying_ying"))))))
 ;;(display "[COUCHDB] Display all changes:")
-;;(display (couchdb-db-changes "panda"))
+;;(display (couchdb-db-changes "panda")
+;;FIXME:
+;;(display "[COUCHDB] Bullk get\n")
+;;(display (couchdb-db-bulk-get "panda" "some json"))
