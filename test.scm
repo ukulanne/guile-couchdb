@@ -85,7 +85,6 @@
 ;;(display (couchdb-db-changes "panda")
 ;;FIXME:
 
-
-            
 (display "[COUCHDB] Bullk get\n")
-(display (couchdb-db-bulk-get "panda" "" "{\"docs\": [{\"id\": \"tohui\"},{\"id\": \"po\"}]}"))
+(display (couchdb-db-bulk-get "panda" "" (scm->json-string `((docs . #(((id . tohui)) ((id . po))))))))
+  
