@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-13 22:28:12 panda> 
+;; Time-stamp: <2019-04-13 22:47:37 panda> 
 
 ;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
 
@@ -43,7 +43,9 @@
 
 (define-macro (define-couchdb-api api verb path tail)
   `(define* (,api . args)
-     (let ((uri (make-uri (string-append ,path (apply string-append (map (lambda (x) (string-append x "/")) args)) ,tail))))
+     (let* ((str (apply string-append (map (lambda (x) (string-append x "/")) args)))
+            (uri (make-uri (string-append ,path (if (> (string-length str) 0) (string-drop-right str 1) str)
+                                          ,tail))))
        (call/wv (lambda () (,verb uri #:decode-body? #t #:keep-alive? #t  #:headers `((content-type . (application/json)))))
                 (lambda (request body) (utf8->string body))))))
 
@@ -62,8 +64,8 @@
   (set! CDB-SERVER url)
   (set! CDB-PORT port))
 
-(define-couchdb-api couchdb-root        http-get "/" "")
-(define-couchdb-api couchdb-up?         http-get "/_up" "")
+(define-couchdb-api couchdb-root        http-get "/" "/")
+(define-couchdb-api couchdb-up?         http-get "/_up" "/")
 (define-couchdb-api couchdb-uuids       http-get "/_uuids?count=" "")
 (define-couchdb-api couchdb-version     http-get "" "")
 (define-couchdb-api couchdb-db-changes  http-get "/" " /db/_changes?style=all_docs")
