@@ -9,7 +9,7 @@
 ;; Couchdb guile wrapper test    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-13 22:35:29 panda> 
+;; Time-stamp: <2019-04-13 23:05:03 panda> 
 
 ;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
 
@@ -84,7 +84,7 @@
 ;;(display "[COUCHDB] Display all changes:")
 ;;(display (couchdb-db-changes "panda")
 ;;FIXME:
-
 (display "[COUCHDB] Bullk get\n")
 (display (couchdb-db-bulk-get "panda" (scm->json-string `((docs . #(((id . tohui)) ((id . po))))))))
-  
+(display "[COUCHDB] Active tasks\n")
+(display (couchdb-active-tasks))

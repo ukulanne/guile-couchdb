@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-13 22:47:37 panda> 
+;; Time-stamp: <2019-04-13 23:04:45 panda> 
 
 ;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
 
@@ -28,7 +28,7 @@
   #:use-module (rnrs bytevectors) 
   #:use-module (web uri)
   #:use-module (web client)
-  #:export (couchdb-db-bulk-get couchdb-db-create couchdb-db-changes couchdb-db-list couchdb-db-all-docs couchdb-doc-delete
+  #:export (couchdb-active-tasks couchdb-db-bulk-get couchdb-db-create couchdb-db-changes couchdb-db-list couchdb-db-all-docs couchdb-doc-delete
             couchdb-doc-get couchdb-doc-insert  couchdb-db-insert-bulk couchdb-doc-list couchdb-root couchdb-server-info
             couchdb-server! couchdb-up? couchdb-version couchdb-uuids))
 
@@ -65,6 +65,7 @@
   (set! CDB-PORT port))
 
 (define-couchdb-api couchdb-root        http-get "/" "/")
+(define-couchdb-api couchdb-active-tasks http-get "/_active_tasks" "")
 (define-couchdb-api couchdb-up?         http-get "/_up" "/")
 (define-couchdb-api couchdb-uuids       http-get "/_uuids?count=" "")
 (define-couchdb-api couchdb-version     http-get "" "")
