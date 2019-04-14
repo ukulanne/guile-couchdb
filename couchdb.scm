@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-13 21:42:12 panda> 
+;; Time-stamp: <2019-04-13 22:28:12 panda> 
 
 ;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
 
@@ -74,10 +74,11 @@
 (define-couchdb-api couchdb-doc-get     http-get "/"  "?include_docs=true")
 
 (define-couchdb-api-body couchdb-doc-insert http-put "/" "")
-(define-couchdb-api-body couchdb-db-insert-bulk http-post "/" "_bulk_docs")
-(define-couchdb-api-body couchdb-db-bulk-get-tmp http-post "/" "/_bulk_get")
+(define-couchdb-api-body helper-insert-bulk http-post "/" "_bulk_docs")
+(define-couchdb-api-body helper-bulk-get http-post "/" "/_bulk_get")
 
-(define (couchdb-db-bulk-get db json) (couchdb-db-bulk-get-tmp db "" json))
+(define (couchdb-db-insert-bulk db json) (helper-insert-bulk db "" json))
+(define (couchdb-db-bulk-get db json) (helper-bulk-get db "" json))
 
 (define (couchdb-doc-delete db id rev)
   (let ((uri (make-uri (string-append "/" db "/" id) (string-append "rev=" rev))))
