@@ -9,7 +9,7 @@
 ;; Couchdb guile wrapper test    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-08 21:45:09 panda> 
+;; Time-stamp: <2019-04-13 21:40:44 panda> 
 
 ;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
 
@@ -86,5 +86,5 @@
 ;;FIXME:
 
 (display "[COUCHDB] Bullk get\n")
-(display (couchdb-db-bulk-get "panda" "" (scm->json-string `((docs . #(((id . tohui)) ((id . po))))))))
+(display (couchdb-db-bulk-get "panda"  (scm->json-string `((docs . #(((id . tohui)) ((id . po))))))))
   
