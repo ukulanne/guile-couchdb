@@ -5,7 +5,7 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-13 23:08:31 panda> 
+;; Time-stamp: <2019-04-13 23:13:49 panda> 
 
 ;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
 
@@ -64,18 +64,21 @@
   (set! CDB-SERVER url)
   (set! CDB-PORT port))
 
-(define-couchdb-api couchdb-root         http-get  "/" "/")
-(define-couchdb-api couchdb-active-tasks http-get  "/_active_tasks" "")
-(define-couchdb-api couchdb-membership   http-get  "_membership" "")
-(define-couchdb-api couchdb-up?          http-get  "/_up" "/")
-(define-couchdb-api couchdb-uuids        http-get  "/_uuids?count=" "")
-(define-couchdb-api couchdb-version      http-get  "" "")
-(define-couchdb-api couchdb-db-changes   http-get  "/" " /db/_changes?style=all_docs")
-(define-couchdb-api couchdb-db-list      http-get  "/_all_dbs" "")
-(define-couchdb-api couchdb-db-create    http-put  "/" "")
-(define-couchdb-api couchdb-db-all-docs  http-get  "/" "/_all_docs")
-(define-couchdb-api couchdb-doc-list     http-get  "/" "?include_docs=true")
-(define-couchdb-api couchdb-doc-get      http-get  "/"  "?include_docs=true")
+(define-couchdb-api couchdb-root           http-get  "/" "/")
+(define-couchdb-api couchdb-active-tasks   http-get  "/_active_tasks" "")
+(define-couchdb-api couchdb-membership     http-get  "_membership" "")
+(define-couchdb-api couchdb-up?            http-get  "/_up" "/")
+(define-couchdb-api couchdb-uuids          http-get  "/_uuids?count=" "")
+(define-couchdb-api couchdb-version        http-get  "" "")
+(define-couchdb-api couchdb-db-changes     http-get  "/" " /db/_changes?style=all_docs")
+(define-couchdb-api couchdb-db-list        http-get  "/_all_dbs" "")
+(define-couchdb-api couchdb-db-create      http-put  "/" "")
+(define-couchdb-api couchdb-db-all-docs    http-get  "/" "/_all_docs")
+
+(deine-couchdb-api  couchdb-doc-attachment        http-get "/" "")
+(define-couchdb-api couchdb-doc-attachment-head   http-head "/" "")
+(define-couchdb-api couchdb-doc-list              http-get  "/" "?include_docs=true")
+(define-couchdb-api couchdb-doc-get               http-get  "/"  "?include_docs=true")
 
 (define-couchdb-api-body couchdb-doc-insert http-put  "/" "")
 (define-couchdb-api-body helper-insert-bulk http-post "/" "_bulk_docs")
