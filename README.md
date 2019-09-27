@@ -1,4 +1,7 @@
 # guile-couchdb
+![Guile](http://img.shields.io/badge/Guile-2.x-blue)
+![License LGPL3](https://img.shields.io/badge/LICENSE-LGPL%203-brightgreen)
+![](https://img.shields.io/github/repo-size/ukulanne/guile-couchdb?style=plastic)
 
 Welcome to the fascinating world of Guile, Scheme and Couchdb. Why would you like to use it? I don't know. Not sure how many pandas are out there interested but please free to reach out with any issue or comments. API will be changing rapidly
 so bear with me. My intentions is to wrap every single couchdb API function.
