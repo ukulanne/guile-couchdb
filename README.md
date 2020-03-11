@@ -1,4 +1,5 @@
 # guile-couchdb
+![Guile](http://img.shields.io/badge/Guile-3.x-cyan)
 ![Guile](http://img.shields.io/badge/Guile-2.x-blue)
 ![License LGPL3](https://img.shields.io/badge/LICENSE-LGPL%203-brightgreen)
 ![](https://img.shields.io/github/repo-size/ukulanne/guile-couchdb?style=plastic)
@@ -12,8 +13,8 @@ Happy Scheming!
 
 # REQUIREMENTS
 
-- [GNU Guile](https://www.gnu.org/software/guile/) 2.x
-- A [couchdb](http://couchdb.apache.org/) server to connect to. Tested with 2.3.x but should work with older versions
+- [GNU Guile](https://www.gnu.org/software/guile/) 2.x or 3.x
+- A [couchdb](http://couchdb.apache.org/) server to connect to. Tested with 2.3.x but should work with older and newer versions
 - I use couchdb for Fedora from this [copr](https://copr.fedorainfracloud.org/coprs/adrienverge/couchdb/) and [github](https://github.com/adrienverge/copr-couchdb)
 - test.scm uses [guile-json 3.1.0](https://github.com/aconchillo/guile-json) 
 
