@@ -1,5 +1,5 @@
 # guile-couchdb
-![Guile](http://img.shields.io/badge/Guile-3.x-pink)
+![Guile 3](http://img.shields.io/badge/Guile-3.x-pink)
 ![Guile](http://img.shields.io/badge/Guile-2.x-blue)
 ![License LGPL3](https://img.shields.io/badge/LICENSE-LGPL%203-brightgreen)
 ![](https://img.shields.io/github/repo-size/ukulanne/guile-couchdb?style=plastic)
