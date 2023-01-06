@@ -91,7 +91,7 @@ To install couchb.scm simply run `install.scm`. The script will automatically in
 ```
 # LICENSE
 
-Copyright (C) 2019 Anne Summers &lt;ukulanne@gmail.com&gt;
+Copyright (C) 2019-2023 Anne Summers &lt;ukulanne@gmail.com&gt;
 
 guile-couchdb is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
 
