@@ -5,9 +5,9 @@
 ;; Couchdb guile wrapper         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Time-stamp: <2019-04-15 21:49:37 panda> 
+;; Time-stamp: <2023-01-06 25:06:37 anne> 
 
-;; Copyright (C) 2019 Anne Summers <ukulanne@gmail.com>
+;; Copyright (C) 2019-2023 Anne Summers <ukulanne@gmail.com>
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    This program is free software: you can redistribute it and/or modify         ;;
