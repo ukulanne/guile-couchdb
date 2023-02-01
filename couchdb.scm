@@ -77,7 +77,7 @@
 (define-couchdb-api couchdb-db-create      http-put  "/" "")
 (define-couchdb-api couchdb-db-all-docs    http-get  "/" "/_all_docs")
 
-(deine-couchdb-api  couchdb-doc-attachment        http-get "/" "")
+(define-couchdb-api  couchdb-doc-attachment        http-get "/" "")
 (define-couchdb-api couchdb-doc-attachment-head   http-head "/" "")
 (define-couchdb-api couchdb-doc-list              http-get  "/" "?include_docs=true")
 (define-couchdb-api couchdb-doc-get               http-get  "/"  "?include_docs=true")
